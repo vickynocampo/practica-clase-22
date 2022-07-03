@@ -16,22 +16,26 @@ const controller = {
 		if (products[i].id === productId){
 				productoEncontrado = products[i];
 		}	
-		} res.render( "detail",  {producto: productoEncontrado} );
-	
-	},
+		} res.render( "detail",  {producto: productoEncontrado} )},
 
-	// Create - Form to create
 	create: (req, res) => {res.render("product-create-form")},
 	
-	// Create -  Method to store
 	store: (req, res) => {
-		// Do the magic
+		let productoNuevo = {
+			name: req.body.name,
+			price: req.body.price,
+			discount: req.body.discount,
+			category: req.body.category,
+			description: req.body.description,
+		}
+		res.redirect("/products")
+		console.log(productoNuevo)
 	},
 
 	// Update - Form to edit
-	edit: (req, res) => {
-		// Do the magic
-	},
+	edit: (req, res) => {res.send("edit")}
+			// Do the magic
+	,
 	// Update - Method to update
 	update: (req, res) => {
 		// Do the magic
