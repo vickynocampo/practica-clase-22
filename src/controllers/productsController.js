@@ -11,18 +11,17 @@ const controller = {
 
 	detail: (req, res) => {	
 		let productId = parseInt(req.params.id, 10);
-		let productoEncontrado = "";
+		let productoEncontrado = " ";
 		for (let i = 0; i < products.lentgh; i++ ){
 		if (products[i].id === productId){
 				productoEncontrado = products[i];
-		}
+		}	
 		} res.render( "detail",  {producto: productoEncontrado} );
+	
 	},
 
 	// Create - Form to create
-	create: (req, res) => {
-		// Do the magic
-	},
+	create: (req, res) => {res.render("product-create-form")},
 	
 	// Create -  Method to store
 	store: (req, res) => {
