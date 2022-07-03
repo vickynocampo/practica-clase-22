@@ -7,23 +7,16 @@ const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const controller = {
-	// Root - Show all products
-	index: (req, res) => {res.render("products", {productos: products})}, //Consigna 2
+	index: (req, res) => {res.render("products", { productos : products})}, 
 
-  	// Detail - Detail from one product // Consigna 3
-	detail: (req, res) => {
+	detail: (req, res) => {	
 		let productId = parseInt(req.params.id, 10);
-		let productoEncontrado;
+		let productoEncontrado = "";
 		for (let i = 0; i < products.lentgh; i++ ){
-			if (products[i].id === productId){
+		if (products[i].id === productId){
 				productoEncontrado = products[i];
-			}
-			if (!productoEncontrado){
-				res.send("No se encuentra el producto");
-			}
-			else {res.render( "detail",  {producto: productoEncontrado} );
-			}
-		} 			
+		}
+		} res.render( "detail",  {producto: productoEncontrado} );
 	},
 
 	// Create - Form to create

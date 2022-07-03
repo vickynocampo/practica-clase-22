@@ -1,0 +1,35 @@
+let celulares = [
+    {
+        id: 1,
+        nombre: 'Motorola Moto E6 Plus',
+        precio: 14999
+    },
+    {
+        id: 2,
+        nombre: 'Motorola Moto G7',
+        precio: 19999
+    },
+    {
+        id: 3,
+        nombre: 'Alcatel 5033A',
+        precio: 6999
+    },
+    {
+        id: 4,
+        nombre: 'Samsung Galaxy A50',
+        precio: 33499
+    }
+];
+
+const express = require('express');
+const router = express.Router();
+
+router.delete("/celular/:id", (req,res) => {
+        
+let idCelular = req.params.id;
+
+let listadoFiltrado = celulares.filter((celular)=>{return celular !== idCelular})
+console.log(listadoFiltrado)
+return listadoFiltrado
+
+});

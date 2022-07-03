@@ -27,8 +27,8 @@ const controller = {
 	},
 	
 	search: (req, res) => {
-		// Do the magic
-		let urlBusqueda = req.query.search;//hay que poner el nombre del name del campo de busqueda
+
+		let urlBusqueda = req.query.search;
 		let resultadoBusqueda =[];
 		for (let i = 0 ; i < products.length; i++){
 			if (products[i].name === urlBusqueda){
