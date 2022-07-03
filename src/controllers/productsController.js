@@ -9,14 +9,16 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const controller = {
 	index: (req, res) => {res.render("products", { productos : products})}, 
 
-	detail: (req, res) => {	
-		let productId = parseInt(req.params.id, 10);
-		let productoEncontrado = " ";
-		for (let i = 0; i < products.lentgh; i++ ){
-		if (products[i].id === productId){
-				productoEncontrado = products[i];
-		}	
-		} res.render( "detail",  {producto: productoEncontrado} )},
+	detail: (req, res) => {
+        const productId = parseInt(req.params.id,10);
+        let productFounded = "";
+        for (let i=0; i<=products.length; i++) {
+            if (products[i].id === productId) {
+                productFounded = products[i]
+                res.render("detail", {producto: productFounded})
+            } 
+        }
+    },
 
 	create: (req, res) => {res.render("product-create-form")},
 	
@@ -32,17 +34,23 @@ const controller = {
 		console.log(productoNuevo)
 	},
 
-	// Update - Form to edit
-	edit: (req, res) => {res.send("edit")}
-			// Do the magic
-	,
-	// Update - Method to update
+	edit: (req, res) => {res.send("hola editar")/*
+		const productId = parseInt(req.params.id,10);
+        let productToEdit = "";
+        for (let i=0; i<=products.length; i++) {
+            if (products[i].id === productId) {
+                productToEdit = products[i]
+                res.render("product-edit-form", {productoEdit: productToEdit})
+            } 
+        }	*/
+	},
+
 	update: (req, res) => {
 		// Do the magic
 	},
 
 	// Delete - Delete one product from DB
-	destroy : (req, res) => {
+	destroy : (req, res) => {res.send("hola eliminar")/*
 			let productId = parseInt(req.params.id, 10);
 			for (let i = 0; i < products.length; i++) {
 				if ( products[i].id === menuId ) {
@@ -50,7 +58,7 @@ const controller = {
 				}
 			}
 			res.send(`se ha borrado la opcion de menu con id ${productId}`);
-		}    
-};
+		}    */
+}}
 
 module.exports = controller;
