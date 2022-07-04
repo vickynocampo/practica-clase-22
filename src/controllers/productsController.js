@@ -34,31 +34,39 @@ const controller = {
 		console.log(productoNuevo)
 	},
 
-	edit: (req, res) => {res.send("hola editar")/*
+	edit: (req, res) => {
 		const productId = parseInt(req.params.id,10);
         let productToEdit = "";
         for (let i=0; i<=products.length; i++) {
             if (products[i].id === productId) {
                 productToEdit = products[i]
-                res.render("product-edit-form", {productoEdit: productToEdit})
+                res.render("product-edit-form", {productToEdit: productToEdit})
             } 
-        }	*/
+        }
 	},
 
 	update: (req, res) => {
-		// Do the magic
+		let idUrl = req.params.id;
+		for (let i = 0; i < products.length; i++){
+			if(products[i].id == idUrl){
+				products[i].name = req.body.name,
+				products[i].price = req.body.price,
+				products[i].discount = req.body.discount
+				products[i].category = req.body.category,
+				products[i].description = req.body.description
+				}
+			 } res.redirect("/products")
 	},
-
-	// Delete - Delete one product from DB
-	destroy : (req, res) => {res.send("hola eliminar")/*
+		
+	destroy : (req, res) => {/*res.send("hola eliminar")*/
 			let productId = parseInt(req.params.id, 10);
 			for (let i = 0; i < products.length; i++) {
-				if ( products[i].id === menuId ) {
+				if ( products[i].id === productId ) {
 					products.splice(i, 1)
 				}
 			}
-			res.send(`se ha borrado la opcion de menu con id ${productId}`);
-		}    */
-}}
+			res.send(`se ha borrado el producto id ${productId}`);
+		}    
+	}
 
 module.exports = controller;
