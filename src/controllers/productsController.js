@@ -23,15 +23,26 @@ const controller = {
 	create: (req, res) => {res.render("product-create-form")},
 	
 	store: (req, res) => {
+		//console.log("req.file")
+		//console.log(req.file);
 		let productoNuevo = {
+			id: products.length + 1,
 			name: req.body.name,
-			price: req.body.price,
-			discount: req.body.discount,
+			price: parseInt(req.body.price),
+			discount: parseInt(req.body.discount),
 			category: req.body.category,
 			description: req.body.description,
+			image: 'default-image.png'
 		}
+	
+		products.push(productoNuevo);
+		
+		productsJson = JSON.stringify(products);
+	
+		fs.writeFileSync(productsFilePath, productsJson);
+
 		res.redirect("/products")
-		console.log(productoNuevo)
+	
 	},
 
 	edit: (req, res) => {

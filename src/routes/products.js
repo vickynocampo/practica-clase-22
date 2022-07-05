@@ -1,27 +1,40 @@
 // ************ Require's ************
 const express = require('express');
 const router = express.Router();
-
+const multer = require("multer");
+const path = require("path");
 // ************ Controller Require ************
 const productsController = require('../controllers/productsController');
 
-/*** GET ALL PRODUCTS ***/ 
-router.get('/', productsController.index); 
+// ************ Multer Settings ************
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, "../../public/images/uploads"))
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.imagen + "-" + Date.now())
+    }
+})
 
-/*** CREATE ONE PRODUCT ***/ 
-router.get('/create/', productsController.create); 
-router.post('/create', productsController.store); 
+/*** GET ALL PRODUCTS ***/
+router.get('/', productsController.index);
 
-/*** GET ONE PRODUCT ***/ 
+/*** CREATE ONE PRODUCT ***/
+let upload = multer({ storage: storage })
+
+router.get('/create/', productsController.create);
+router.post('/', upload.single("imagen"), productsController.store);
+
+/*** GET ONE PRODUCT ***/
 router.get('/:id/', productsController.detail);
 router.get('/detail/:id/', productsController.detail);
 
 
-/*** EDIT ONE PRODUCT ***/ 
-router.get('/edit/:id', productsController.edit); 
-router.put('/:id', productsController.update); 
+/*** EDIT ONE PRODUCT ***/
+router.get('/edit/:id', productsController.edit);
+router.put('/:id', productsController.update);
 
-/*** DELETE ONE PRODUCT***/ 
-router.delete('/:id', productsController.destroy); 
+/*** DELETE ONE PRODUCT***/
+router.delete('/:id', productsController.destroy);
 
 module.exports = router;

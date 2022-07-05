@@ -27,11 +27,10 @@ const controller = {
 	},
 	
 	search: (req, res) => {
-
-		let urlBusqueda = req.query.search;
+		let urlBusqueda = req.query.searchForm;
 		let resultadoBusqueda =[];
 		for (let i = 0 ; i < products.length; i++){
-			if (products[i].name === urlBusqueda){
+			if (products[i].name == urlBusqueda){
 				resultadoBusqueda.push(products[i]);
 			}
 		}
